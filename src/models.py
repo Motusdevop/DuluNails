@@ -1,6 +1,6 @@
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 from typing import Optional
-from datetime import date
+from datetime import datetime
 
 class Base(DeclarativeBase): pass
 
@@ -8,8 +8,9 @@ class Appointment(Base):
     __tablename__ = 'appointment'
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    date: Mapped[date]
-    time: Mapped[str]
+    date: Mapped[datetime]
+    active: Mapped[bool] = False
+    user_id = Mapped[Optional[int]]
 
 class User(Base):
     __tablename__ = 'user'
@@ -19,5 +20,5 @@ class User(Base):
     telegram_id: Mapped[int]
     phone: Mapped[str]
     active_appointment_id : Mapped[Optional[int]]
-    banned: Mapped[bool]
+    banned: Mapped[bool] = False
 

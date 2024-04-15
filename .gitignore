@@ -1,3 +1,8 @@
 .idea/
 media/*.jpg
 media/*.png
+.env
+
+src/__pycache__/
+src/handlers/__pycache__/
+src/forms/__pycache__/

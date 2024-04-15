@@ -9,11 +9,12 @@ from aiogram.types import ReplyKeyboardRemove, \
     InlineKeyboardMarkup, InlineKeyboardButton, \
     FSInputFile
 
+import keyboards
 from repository import UserRepository
 
 from forms.register import RegisterForm
 
-from keyboards import menu
+from keyboards import Menu, Contact, Admin
 
 router = Router()
 
@@ -25,7 +26,7 @@ async def check_register(message: Message, state: FSMContext):
 
         await message.answer(
             'Пожалуйста сначала зарегистрируйтесь. Для этого нажмите кнопку: "Отправить свой контакт ☎️"',
-                             reply_markup=markup)
+                             reply_markup=Contact.markup)
         await state.set_state(RegisterForm.phone)
 
 
@@ -33,9 +34,13 @@ async def check_register(message: Message, state: FSMContext):
 async def cmd_start(message: Message, state: FSMContext):
     await message.answer(
         """Здравствуйте, это бот для записи на маникюр""",
-        reply_markup=menu.markup, parse_mode=ParseMode.MARKDOWN
+        reply_markup=Menu.markup, parse_mode=ParseMode.MARKDOWN
     )
     await check_register(message, state)
+
+@router.message(F.text, Command('admin'))
+async def admin_panel(message: Message, state: FSMContext):
+    await message.answer('Здравствуйте', reply_markup=Admin.markup)
 
 @router.message(F.text.lower() == 'прайс-лист 💸')
 async def pricelist(message: Message):
