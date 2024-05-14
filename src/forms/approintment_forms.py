@@ -1,7 +1,7 @@
 from aiogram.fsm.state import StatesGroup, State
 
 
-class CreateApprointmentForm(StatesGroup):
-    approiment_id = State()
-    service_id = State()
+class MakeApprointmentForm(StatesGroup):
+    window_id = State()
+    correct_time = State()
     confirmation = State()
