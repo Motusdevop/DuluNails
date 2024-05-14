@@ -1,6 +1,4 @@
 .idea/
-media/*.jpg
-media/*.png
 .env
 
 src/__pycache__/*
